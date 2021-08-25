@@ -1,4 +1,5 @@
 import {FC} from "react"
+import { addTask } from "src/state/actions"
 import { useAppState } from "src/state/appState"
 import { AddNewItem } from "../AddNewItem/AddNewItem"
 import { Card } from "../Card/Card"
@@ -12,8 +13,7 @@ interface IColumnProps {
 }
 
 export const Column = ({text, id}: IColumnProps) => {
-    const {getTasksByListId} = useAppState()
-
+    const {getTasksByListId, dispatch} = useAppState()
     const tasks = getTasksByListId(id)
 
     return (
@@ -24,7 +24,7 @@ export const Column = ({text, id}: IColumnProps) => {
             ))}
             <AddNewItem
                 toggleButtonText="+ Add A Task"
-                onAdd={console.log}
+                onAdd={(text) => dispatch(addTask(text, id))}
                 dark
             />
         </ColumnContainer>

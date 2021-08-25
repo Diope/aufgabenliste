@@ -1,8 +1,7 @@
 import { Action } from "./actions";
 import {nanoid} from 'nanoid'
-import { ADD_LIST, ADD_TASK } from "./constants";
-import { strictEqual } from "assert";
-import { findItemIndexById } from "src/utils/arrayUtils";
+import { ADD_LIST, ADD_TASK, MOVE_LIST } from "./constants";
+import { findItemIndexById, moveItem } from "src/utils/arrayUtils";
 
 export interface Task {
     id: string
@@ -37,6 +36,13 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
                 id: nanoid(),
                 text
             })
+            break
+        }
+        case MOVE_LIST: {
+            const {hoverId,draggedId} = action.payload;
+            const dragIdx = findItemIndexById(draft.lists, draggedId)
+            const hoverIdx = findItemIndexById(draft.lists, hoverId)
+            draft.lists = moveItem(draft.lists, dragIdx, hoverIdx)
             break
         }
         default: {

@@ -1,6 +1,9 @@
-import { ADD_LIST, ADD_TASK } from "./constants"
+import { ADD_LIST, ADD_TASK, MOVE_LIST } from "./constants"
 
-export type Action = | {type: "ADD_LIST", payload: string} | { type: "ADD_TASK", payload: {text: string, listId: string} }
+export type Action = | 
+    {type: "ADD_LIST", payload: string} | 
+    {type: "ADD_TASK", payload: {text: string, listId: string}} | 
+    {type: "MOVE_LIST", payload: {draggedId: string, hoverId: string}}
 
 export const addTask = (
     text: string,
@@ -18,4 +21,15 @@ export const addList = (
 ): Action => ({
     type: ADD_LIST,
     payload: text
+})
+
+export const moveList = (
+    draggedId: string,
+    hoverId: string
+): Action => ({
+    type: MOVE_LIST,
+    payload: {
+        draggedId,
+        hoverId
+    }
 })
