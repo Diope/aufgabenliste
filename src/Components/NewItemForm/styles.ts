@@ -26,5 +26,8 @@ export const NewItemInput = styled.input`
     margin-bottom: 0.5rem;
     width: 100%;
     padding: 0.5rem 1rem;
-    box-shadow: #091e4240 0px 1px 0px 0px;
+
+    &:focus {
+        outline: none;
+    }
 `;

@@ -2,11 +2,11 @@
 import { CardContainer } from "./styles"
 
 
-interface CardProps {
+interface ICardProps {
     text: string
 }
 
-export const Card = ({text}: CardProps) => {
+export const Card = ({text}: ICardProps) => {
     return (
         <CardContainer>
             {text}

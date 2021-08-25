@@ -2,11 +2,11 @@ import {FC} from "react"
 import { AddNewItem } from "../AddNewItem/AddNewItem"
 import { ColumnContainer, ColumnTitle } from "./styles"
 
-interface ColumnProps {
+interface IColumnProps {
     text: string
 }
 
-export const Column: FC<ColumnProps> = ({text, children}) => {
+export const Column: FC<IColumnProps> = ({text, children}) => {
     return (
         <ColumnContainer>
             <ColumnTitle>{text}</ColumnTitle>

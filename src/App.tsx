@@ -17,7 +17,7 @@ export const App: FC = ({children}) => {
       <Column text="Done">
         <Card text="Cleaned out car" />
       </Column>
-      <AddNewItem toggleButtonText="+ Add another list" onAdd={console.log} />
+      <AddNewItem toggleButtonText="+ Add another list" dark={true} onAdd={console.log} />
     </Container>
   );
 }
