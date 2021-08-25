@@ -1,4 +1,4 @@
-import {FC} from "react"
+
 import { addTask } from "src/state/actions"
 import { useAppState } from "src/state/appState"
 import { AddNewItem } from "../AddNewItem/AddNewItem"
