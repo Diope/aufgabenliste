@@ -1,4 +1,4 @@
-export interface ColumnDragItem {
+export type ColumnDragItem = {
     id: string
     text: string
     type: "COLUMN"
