@@ -1,6 +1,6 @@
 import { createContext, Dispatch, FC, useContext} from "react";
 import { Action } from "./actions";
-import { appStateReducer, AppState, List, Task } from "./reducer";
+import { appStateReducer, AppState, IList, ITask } from "./reducer";
 import {useImmerReducer} from 'use-immer';
 import { DragItem } from "src/utils/DragItem";
 
@@ -8,30 +8,14 @@ import { DragItem } from "src/utils/DragItem";
 const AppStateContext = createContext<IAppStateContextProps>({} as IAppStateContextProps)
 
 interface IAppStateContextProps {
-    lists: List[]
+    lists: IList[]
     draggedItem: DragItem | null
-    getTasksByListId(id: string): Task[]
+    getTasksByListId(id: string): ITask[]
     dispatch: Dispatch<Action>
-}
+};
 
 const appData: AppState = {
-    lists: [
-        {
-            id: "0",
-            text: "To Do",
-            tasks: [{id: "89fds", text: "Diamonds Dancing"}]
-        },
-        {
-            id: "1",
-            text: "Doing",
-            tasks: [{id: "f23ds", text: "Wish Wish"}]
-        },
-        {
-            id: "2",
-            text: "Done",
-            tasks: [{id: "fd932", text: "Bubble Pop Electric"}]
-        }
-    ],
+    lists: [],
     draggedItem: null
 }
 

@@ -1,8 +1,9 @@
 import {useRef} from "react";
 import {useDrop} from "react-dnd";
 
-import { addTask, moveList } from "src/state/actions";
+import { addTask, moveList, moveTask, setDraggedItem } from "src/state/actions";
 import { useAppState } from "src/state/appState";
+import { DragItem } from "src/utils/DragItem";
 import { isHidden } from "src/utils/isHidden";
 import { useItemDrag } from "src/utils/useItemDrag";
 import { AddNewItem } from "../AddNewItem/AddNewItem"
@@ -20,14 +21,20 @@ export const Column = ({text, id, isPreview}: IColumnProps) => {
     const tasks = getTasksByListId(id);
     const ref = useRef<HTMLDivElement>(null);
     const [, drop] = useDrop({
-        accept: "COLUMN",
-        hover() {
+        accept: ["COLUMN", "CARD"],
+        hover(item: DragItem) {
             if (!draggedItem) return
             if (draggedItem.type === "COLUMN") {
                 if (draggedItem.id === id) return
+                dispatch(moveList(draggedItem.id, id))
+            } else {
+                if (draggedItem.columnId === id) return
+                if (tasks.length) return
+
+                dispatch(moveTask(draggedItem.id, null, draggedItem.columnId, id))
+                dispatch(setDraggedItem({...draggedItem, columnId: id}))
             }
-            dispatch(moveList(draggedItem.id, id))
-        }
+        } 
     })
 
     const {drag} = useItemDrag({type: "COLUMN", id, text})

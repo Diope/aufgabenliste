@@ -4,19 +4,19 @@ import { ADD_LIST, ADD_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM } from "./co
 import { findItemIndexById, moveItem } from "src/utils/arrayUtils";
 import { DragItem } from "src/utils/DragItem";
 
-export interface Task {
+export interface ITask {
     id: string
     text: string
 }
 
-export interface List {
+export interface IList {
     id: string
     text: string
-    tasks: Task[]
+    tasks: ITask[]
 }
 
 export interface AppState {
-    lists: List[]
+    lists: IList[]
     draggedItem: DragItem | null;
 }
 
@@ -53,8 +53,8 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
         }
         case MOVE_TASK: {
             const { hoveredItemId, draggedItemId,sourceColumnId, targetColumnId } = action.payload;
-            const sourceListIdx = findItemIndexById(draft.lists, sourceColumnId);
             const targetListIdx = findItemIndexById(draft.lists, targetColumnId);
+            const sourceListIdx = findItemIndexById(draft.lists, sourceColumnId);
             const dragIdx = findItemIndexById(draft.lists[sourceListIdx].tasks, draggedItemId);
             const hoverIdx = hoveredItemId ? findItemIndexById(draft.lists[targetListIdx].tasks, hoveredItemId) : 0;
             const movedItem = draft.lists[sourceListIdx].tasks[dragIdx];

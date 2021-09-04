@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { useDrop } from "react-dnd"
-import { moveTask, setDraggedItem } from "src/state/actions"
+import { moveTask } from "src/state/actions"
 import { useAppState } from "src/state/appState"
 import { isHidden } from "src/utils/isHidden"
 import { useItemDrag } from "src/utils/useItemDrag"
