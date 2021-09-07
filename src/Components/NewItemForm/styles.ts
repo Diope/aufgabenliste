@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 export const NewItemFormContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -17,7 +18,7 @@ export const NewItemBtn = styled.div`
     padding: 6px 12px;
 
     color: #fff;
-    background-color: #66A6D5;
+    background-color: #333;
 `;
 
 export const NewItemInput = styled.input`
@@ -26,6 +27,7 @@ export const NewItemInput = styled.input`
     margin-bottom: 0.5rem;
     width: 100%;
     padding: 0.5rem 1rem;
+    background-color: #eee;
 
     &:focus {
         outline: none;

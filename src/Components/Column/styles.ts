@@ -1,8 +1,11 @@
 import styled from "styled-components";
+import {RiCloseCircleFill} from 'react-icons/ri'
 
 export const ColumnTitle = styled.div`
+    font-family: 'Work San', sans-serif;
     font-weight: 300;
-    font-size: 26px;
+    color: #000;
+    font-size: 30px;
     padding: 6px 16px 12px;
 `;
 interface DragPreviewContainerProps {
@@ -16,6 +19,8 @@ export const DragPreviewContainer = styled.div<DragPreviewContainerProps>`
 `;
 
 export const ColumnContainer = styled(DragPreviewContainer)`
+    transition: all 300ms ease-in-out;
+    cursor: pointer;
     background-color: #fff;
     width: 300px;
     min-height: 40px;
@@ -23,7 +28,12 @@ export const ColumnContainer = styled(DragPreviewContainer)`
     border-radius: 3px;
     padding: 8px 8px;
     flex-grow: 0;
-`;
+
+        &:hover {
+            box-shadow: 0px 4px 11px -9px rgba(0, 0, 0, 0.50);
+        }
+
+    `;
 
 export const CustomDragLayerContainer = styled.div`
     height: 100%;
@@ -49,3 +59,13 @@ export const DragPreviewWrapper = styled.div.attrs<DragPreviewWrapperProps>(
         }
     })
 )<DragPreviewWrapperProps>``
+
+export const CardCloseButton = styled(RiCloseCircleFill)`
+    transition: all 300ms ease-in-out;
+    opacity: 0.35;
+    position: right;
+
+    &:hover {
+        opacity: 1;
+    }
+`;

@@ -9,6 +9,10 @@ export const findItemIndexById = <TItem extends IItem>(
     return items.findIndex((item: TItem) => item.id === id)
 };
 
+// export function removeIdxItem(arr, idx) {
+//     return [...arr.slice(0, idx), ...arr.slice(idx +1)]
+// }
+
 export function removeItemAtIndex<TItem>(array: TItem[], index: number) {
     return [...array.slice(0, index), ...array.slice(index + 1)]
 }

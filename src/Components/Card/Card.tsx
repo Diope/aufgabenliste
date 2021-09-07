@@ -1,10 +1,11 @@
 import { useRef } from "react"
 import { useDrop } from "react-dnd"
-import { moveTask } from "src/state/actions"
+import { moveTask, deleteTask } from "src/state/actions"
 import { useAppState } from "src/state/appState"
 import { isHidden } from "src/utils/isHidden"
 import { useItemDrag } from "src/utils/useItemDrag"
-import { CardContainer } from "./styles"
+
+import { CardContainer, CloseButton } from "./styles"
 
 
 interface ICardProps {
@@ -37,13 +38,17 @@ export const Card = ({text, id, columnId, isPreview}: ICardProps) => {
 
     drag(drop(ref))
 
+    const handleDeleteTask = (id: string, columnId: string): void => {
+        dispatch(deleteTask(columnId, id))
+    }
+
     return (
         <CardContainer
             isHidden={isHidden(draggedItem, "CARD", id, isPreview)}
             isPreview={isPreview}
             ref={ref}
         >
-            {text}
+            <div>{text}</div><div onClick={() => handleDeleteTask(id, columnId)}><CloseButton /></div>
         </CardContainer>
     )
 }

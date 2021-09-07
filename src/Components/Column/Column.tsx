@@ -1,14 +1,14 @@
 import {useRef} from "react";
 import {useDrop} from "react-dnd";
 
-import { addTask, moveList, moveTask, setDraggedItem } from "src/state/actions";
+import { addTask, moveList, moveTask, setDraggedItem, deleteList } from "src/state/actions";
 import { useAppState } from "src/state/appState";
 import { DragItem } from "src/utils/DragItem";
 import { isHidden } from "src/utils/isHidden";
 import { useItemDrag } from "src/utils/useItemDrag";
 import { AddNewItem } from "../AddNewItem/AddNewItem"
 import { Card } from "../Card/Card"
-import { ColumnContainer, ColumnTitle } from "./styles"
+import { CardCloseButton, ColumnContainer, ColumnTitle } from "./styles"
 
 interface IColumnProps {
     text: string
@@ -38,8 +38,11 @@ export const Column = ({text, id, isPreview}: IColumnProps) => {
     })
 
     const {drag} = useItemDrag({type: "COLUMN", id, text})
-
     drag(drop(ref))
+
+    const handleDeleteList = (id: string): void => {
+        dispatch(deleteList(id));
+    }
 
     return (
         <ColumnContainer
@@ -47,7 +50,8 @@ export const Column = ({text, id, isPreview}: IColumnProps) => {
             ref={ref}
             isHidden={isHidden(draggedItem, "COLUMN", id, isPreview)}
         >
-            <ColumnTitle>{text}</ColumnTitle>
+            <CardCloseButton id="cardclosebtn" onClick={() => handleDeleteList(id)} />
+            <div><ColumnTitle>{text}</ColumnTitle></div>
             {tasks.map(task => (
                 <Card text={task.text} key={task.id} id={task.id} columnId={id} />
             ))}

@@ -1,6 +1,6 @@
 import { Action } from "./actions";
 import {nanoid} from 'nanoid'
-import { ADD_LIST, ADD_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM } from "./constants";
+import { ADD_LIST, ADD_TASK, DELETE_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM, DELETE_LIST } from "./constants";
 import { findItemIndexById, moveItem } from "src/utils/arrayUtils";
 import { DragItem } from "src/utils/DragItem";
 
@@ -40,11 +40,27 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
             })
             break
         }
+        case DELETE_TASK: {
+            const {targetItemId, sourceColumnId} = action.payload
+            const sourceListIdx = findItemIndexById(draft.lists, sourceColumnId);
+            const targetItemIdx = findItemIndexById(draft.lists[sourceListIdx].tasks, targetItemId);
+
+            // draft.lists[targetListIdx].tasks.filter((task) => taskId !== task.id)
+            draft.lists[sourceListIdx].tasks.splice(targetItemIdx, 1)
+            break
+        }
         case MOVE_LIST: {
             const {hoverId,draggedId} = action.payload;
             const dragIdx = findItemIndexById(draft.lists, draggedId)
             const hoverIdx = findItemIndexById(draft.lists, hoverId)
             draft.lists = moveItem(draft.lists, dragIdx, hoverIdx)
+            break
+        }
+        case DELETE_LIST: {
+            const {sourceColumnId} = action.payload;
+            const sourceListIdx = findItemIndexById(draft.lists, sourceColumnId)
+
+            draft.lists.splice(sourceListIdx, 1)
             break
         }
         case SET_DRAGGED_ITEM: {
