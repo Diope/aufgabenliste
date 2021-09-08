@@ -1,9 +1,8 @@
-import { createContext, Dispatch, FC, useContext} from "react";
+import { createContext, Dispatch, FC, useContext, useEffect} from "react";
 import { Action } from "./actions";
 import { appStateReducer, AppState, IList, ITask } from "./reducer";
 import {useImmerReducer} from 'use-immer';
 import { DragItem } from "src/utils/DragItem";
-
 
 const AppStateContext = createContext<IAppStateContextProps>({} as IAppStateContextProps)
 
@@ -19,9 +18,16 @@ const appData: AppState = {
     draggedItem: null
 }
 
+const localState: AppState = JSON.parse(localStorage.getItem('globalState')!); // still not udnerstanding why ('globalState) || {} doesn't work but meh.
+
 export const AppStateProvider: FC = ({children}) => {
-    const [state, dispatch] = useImmerReducer(appStateReducer, appData)
-    const {lists, draggedItem} = state
+
+    const [state, dispatch] = useImmerReducer(appStateReducer, localState || appData)
+    const {lists, draggedItem} = state;
+    
+    useEffect(() => {
+        localStorage.setItem("globalState", JSON.stringify(state))
+    }, [state])
 
     const getTasksByListId = (id: string) => {
         return lists.find((list) => list.id === id)?.tasks || []
