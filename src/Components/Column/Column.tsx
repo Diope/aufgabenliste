@@ -8,7 +8,7 @@ import { isHidden } from "src/utils/isHidden";
 import { useItemDrag } from "src/utils/useItemDrag";
 import { AddNewItem } from "../AddNewItem/AddNewItem"
 import { Card } from "../Card/Card"
-import { CardCloseButton, ColumnContainer, ColumnTitle } from "./styles"
+import { CardCloseButton, ColumnContainer, ColumnTitle} from "./styles"
 
 interface IColumnProps {
     text: string

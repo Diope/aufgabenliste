@@ -1,6 +1,6 @@
 import { Action } from "./actions";
 import {nanoid} from 'nanoid'
-import { ADD_LIST, ADD_TASK, DELETE_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM, DELETE_LIST } from "./constants";
+import { ADD_LIST, ADD_TASK, DELETE_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM, DELETE_LIST, ADD_TITLE_TEXT } from "./constants";
 import { findItemIndexById, moveItem } from "src/utils/arrayUtils";
 import { DragItem } from "src/utils/DragItem";
 
@@ -18,6 +18,7 @@ export interface IList {
 export interface AppState {
     lists: IList[]
     draggedItem: DragItem | null;
+    titleText: string | null;
 }
 
 export const appStateReducer = (draft: AppState, action: Action): AppState | void => {
@@ -28,6 +29,10 @@ export const appStateReducer = (draft: AppState, action: Action): AppState | voi
                 text: action.payload,
                 tasks: []
             })
+            break
+        }
+        case ADD_TITLE_TEXT: {
+            draft.titleText = action.payload
             break
         }
         case ADD_TASK: {

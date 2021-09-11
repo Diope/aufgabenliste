@@ -1,5 +1,5 @@
 import { DragItem } from "src/utils/DragItem"
-import { ADD_LIST, ADD_TASK, DELETE_LIST, DELETE_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM } from "./constants"
+import { ADD_LIST, ADD_TASK, ADD_TITLE_TEXT, DELETE_LIST, DELETE_TASK, MOVE_LIST, MOVE_TASK, SET_DRAGGED_ITEM } from "./constants"
 
 export type Action = | 
     {type: "ADD_LIST", payload: string} | 
@@ -10,7 +10,8 @@ export type Action = |
         {draggedItemId: string, hoveredItemId: string | null, sourceColumnId: string, targetColumnId: string}
     } |
     {type: "DELETE_TASK", payload: {sourceColumnId: string, targetItemId: string}} |
-    {type: "DELETE_LIST", payload: {sourceColumnId: string}}
+    {type: "DELETE_LIST", payload: {sourceColumnId: string}} |
+    {type: "ADD_TITLE_TEXT", payload: string}
 
 
 // LISTS
@@ -80,4 +81,11 @@ export const moveTask = (
         sourceColumnId,
         targetColumnId,
     }
-})
+});
+
+export const addTitleText = (
+    text: string
+): Action => ({
+    type: ADD_TITLE_TEXT,
+    payload: text
+});

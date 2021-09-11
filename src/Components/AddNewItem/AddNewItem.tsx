@@ -9,9 +9,8 @@ interface IAddNewItemProps {
     dark?: boolean
 }
 
-export const AddNewItem = (props: IAddNewItemProps) => {
-    const [showForm, setShowForm] = useState(false);
-    const {onAdd, toggleButtonText, dark} = props
+export const AddNewItem = ({onAdd, toggleButtonText, dark}: IAddNewItemProps) => {
+    const [showForm, setShowForm] = useState(false); 
 
     if (showForm) {
         return (

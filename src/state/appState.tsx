@@ -15,7 +15,8 @@ interface IAppStateContextProps {
 
 const appData: AppState = {
     lists: [],
-    draggedItem: null
+    draggedItem: null,
+    titleText: null
 }
 
 const localState: AppState = JSON.parse(localStorage.getItem('globalState')!); // still not udnerstanding why ('globalState) || {} doesn't work but meh.
