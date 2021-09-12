@@ -1,17 +1,17 @@
 import { AddNewItem } from "./Components/AddNewItem/AddNewItem";
 import { Column } from "./Components/Column/Column";
 import { CustomDragLayer } from "./CustomDragLayer";
-import { addList } from "./state/actions";
+import { addList, addTitleText } from "./state/actions";
 import { useAppState } from "./state/appState";
 import { Container } from "./styles";
-import {InputTitle} from "./Components/InputTitle/InputTitle"
+import { InputTitle } from "./Components/InputTitle/InputTitle"
 
 export const App = () => {
   const {lists, dispatch} = useAppState()
 
   return (
     <>
-        <InputTitle titleText={"Current Goals 🚀"} />
+        <InputTitle onAdd={(text) => dispatch(addTitleText(text))} />
         <Container>
           <CustomDragLayer />
           {lists.map((list) => (

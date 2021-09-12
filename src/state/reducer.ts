@@ -18,7 +18,7 @@ export interface IList {
 export interface AppState {
     lists: IList[]
     draggedItem: DragItem | null;
-    titleText: string | null;
+    titleText: string;
 }
 
 export const appStateReducer = (draft: AppState, action: Action): AppState | void => {

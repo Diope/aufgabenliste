@@ -11,12 +11,13 @@ interface IAppStateContextProps {
     draggedItem: DragItem | null
     getTasksByListId(id: string): ITask[]
     dispatch: Dispatch<Action>
+    titleText: string
 };
 
 const appData: AppState = {
     lists: [],
     draggedItem: null,
-    titleText: null
+    titleText: ""
 }
 
 const localState: AppState = JSON.parse(localStorage.getItem('globalState')!); // still not udnerstanding why ('globalState) || {} doesn't work but meh.
@@ -24,7 +25,7 @@ const localState: AppState = JSON.parse(localStorage.getItem('globalState')!); /
 export const AppStateProvider: FC = ({children}) => {
 
     const [state, dispatch] = useImmerReducer(appStateReducer, localState || appData)
-    const {lists, draggedItem} = state;
+    const {lists, draggedItem, titleText} = state;
     
     useEffect(() => {
         localStorage.setItem("globalState", JSON.stringify(state))
@@ -35,7 +36,7 @@ export const AppStateProvider: FC = ({children}) => {
     }
 
     return (
-        <AppStateContext.Provider value={{draggedItem, lists, getTasksByListId, dispatch}}>
+        <AppStateContext.Provider value={{draggedItem, lists, getTasksByListId, dispatch, titleText }}>
             {children}
         </AppStateContext.Provider>
     )
