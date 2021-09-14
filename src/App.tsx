@@ -5,6 +5,7 @@ import { addList, addTitleText } from "./state/actions";
 import { useAppState } from "./state/appState";
 import { Container } from "./styles";
 import { InputTitle } from "./Components/InputTitle/InputTitle"
+import { Footer } from "./Components/Footer/Footer";
 
 export const App = () => {
   const {lists, dispatch} = useAppState()
@@ -19,6 +20,7 @@ export const App = () => {
           ))}
           <AddNewItem toggleButtonText="+ Add another list" dark={true} onAdd={(text) => dispatch(addList(text))} />
         </Container>
+        <Footer />
     </>
   );
 }
