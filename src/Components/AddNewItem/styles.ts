@@ -13,6 +13,7 @@ export const AddItemBtn = styled.button<IAddItemBtnProp>`
     text-align: left;
     max-width: 300px;
     width: 100%;
+    font-size: 1.0rem;
 
     transition: all 300ms ease-in-out;
     

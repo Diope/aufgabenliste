@@ -20,5 +20,6 @@ export const TitleInput = styled.input`
     &:focus {
         outline: none;
         border: none;
+        background-color: #F0F0F0;
     }
 `;

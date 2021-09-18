@@ -11,31 +11,40 @@ interface ITitleProps {
 }
 
 export const InputTitle = ({onAdd}: ITitleProps) => {
-    const [showForm, setShowForm] = useState(false);
-    const [listTitle, setListTitle] = useState("Click to Title");
+    const [showForm, setShowForm] = useState(true);
+
+    const [listTitle, setListTitle] = useState("");
     const inputRef = useFocus();
     const {titleText} = useAppState();
 
     const handleAddText = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
-            onAdd(listTitle)
-            // console.log(listTitle);
-            setShowForm(false);
+            onAdd(listTitle);
+            setShowForm(true);
         }
     }
 
-    // const handleFocus = (e: React.FocusEvent<HTMLInputElement>): void => e.target.select();
 
-    if (showForm) {
+    if (showForm === false) {
         return (
-            <TitleInput ref={inputRef} type="text" value={listTitle} onChange={(e) => setListTitle(e.target.value)} onKeyPress={handleAddText} onFocus={(e) => e.target.select()} />
+            <TitleInput 
+                ref={inputRef} 
+                type="text" 
+                value={listTitle} 
+                onChange={(e) => setListTitle(e.target.value)} 
+                onKeyPress={handleAddText}
+                onFocus={(e) => e.target.select()}
+            />
         )
     }
 
+
     return (
-        
         <div>
-            <TitleComponent onClick={() => setShowForm(true)} >{titleText}</TitleComponent>
+            <TitleComponent 
+                onClick={() => setShowForm(false)}
+            >{titleText === "" ? "Click to Edit Title" : titleText}</TitleComponent>
         </div>
     )
+
 }
