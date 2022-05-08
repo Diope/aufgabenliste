@@ -11,6 +11,7 @@ Live at https://aufgabenlisten.netlify.app
 * React
 * ContextAPI
 * Docker
+* HTML5 Drag & Drop
 * Github Actions for CI/CD
 
 ### To Run
