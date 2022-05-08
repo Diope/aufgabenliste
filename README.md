@@ -1,7 +1,7 @@
-# Aufgabenliste
+# Aufgabenlisten
 
 To do or not...to do. A simple To do app with drag and drop, reordering capabilities.
-Live at https://aufgabenlist.netlify.app
+Live at https://aufgabenlisten.netlify.app
 
 ![aufgabenliste](aufgabenliste.png)
 
